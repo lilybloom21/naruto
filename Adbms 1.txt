@@ -1,0 +1,35 @@
+Create following collections:
+ACCOUNT (accno, customer_id, branch_id, balance)
+BRANCH (branch_id, branch name, branch_city, assets)
+CUSTOMER (customr_id, customer_name, customer_street, city)
+1.Select customer details of those customers whose city is nasik.
+2.Display details of branch whose assets is more than 3000 or whose city is pune.
+3.Display details of branch whose assets is more than 3000 and whose city is nasik
+4.Display details of accounts from branch nasik in ascending/descending order of balance
+5.Increase balance of customer by 3000 whose balance is less than 1000.
+6.Delete assets is in between between 1500 and 3000.
+7.Find out distinct customer name from city nasik.
+8.Update city of customer whose name is xyz and whose city should be Mumbai
+9.Remove branch collection
+----------------------------------------------------------------------------------------------*/
+1 ) Select customer details of those customers whose city is nasik.
+> db.customer.find({city:"nashik"}).pretty()
+2) Display details of branch whose assets is more than 300000 or whose city is pune.
+> db.branch.find({$or:[{assetes:{$gt:2000}},{branch_city:"pune"}]}).pretty()
+3 ) Display details of branch whose assets is more than 300000 and whose city is nasik
+> db.branch.find({assets:{$gt:100},branch_city:"nashik"}).pretty()
+4)Display details of accounts from branch nasik in ascending/descending order of balance
+db.account.find({city:"nashik"}).sort({balance:1}).pretty()
+5) Increase balance of customer by 3000 whose balance is less than 1000.
+> db.account.update({balance:{$lt:150}},{$inc:{balance:3000}},{multi:true})
+> db.account.find().pretty()
+6) Delete account of those customers whose balance is in between 1500 and 3000.
+> db.account.remove({balance:{$gt:1500,$lt:3200}})
+> db.account.find().pretty()
+7) Find out distinct customer name from city nasik.
+> db.customer.distinct("customer_name",{city:"nashik"})
+8) Update city of those customer whose name is ramseh and city should be mumbai
+> db.customer.update({customer_name:"sagar"},{$set:{city:"Mumbai"}})
+> db.customer.find({city:"Mumbai"}).pretty()
+9) Remove account collection from database
+> db.account.remove({})

@@ -1,0 +1,39 @@
+MongoDB mapReduce()
+Create Student Collection and insert some document in it.
+By using Find command display Documents.
+
+> db.students.find({});
+{ "_id" : ObjectId("5a1f9ce431c157f3ec2aec39"), "name" :
+"Midhu", "subject" : "science", "marks" : 68 }
+{ "_id" : ObjectId("5a1f9ce431c157f3ec2aec3a"), "name" :
+"Midhu", "subject" : "maths", "marks" : 98 }
+{ "_id" : ObjectId("5a1f9ce431c157f3ec2aec3b"), "name" :
+"Midhu", "subject" : "sports", "marks" : 77 }
+{ "_id" : ObjectId("5a1f9ce431c157f3ec2aec3c"), "name" :
+"Akhil", "subject" : "science", "marks" : 67 }
+{ "_id" : ObjectId("5a1f9ce431c157f3ec2aec3d"), "name" :
+"Akhil", "subject" : "maths", "marks" : 87 }
+{ "_id" : ObjectId("5a1f9ce431c157f3ec2aec3e"), "name" :
+"Akhil", "subject" : "sports", "marks" : 89 }
+{ "_id" : ObjectId("5a1f9ce431c157f3ec2aec3f"), "name" :
+"Anish", "subject" : "science", "marks" : 67 }
+{ "_id" : ObjectId("5a1f9ce431c157f3ec2aec40"), "name" :
+"Anish", "subject" : "maths", "marks" : 78 }
+{ "_id" : ObjectId("5a1f9ce431c157f3ec2aec41"), "name" :
+"Anish", "subject" : "sports", "marks" : 90 }
+
+
+1. Prepare Map function
+var map = function() {emit(this.name,this.marks);};
+
+
+2. Prepare Reduce function
+var reduce = function(name,marks) {return Array.sum(marks);};
+
+
+3. Prepare mapReduce function
+db.students.mapReduce(
+map,
+reduce,
+{ out: "totals" }
+);

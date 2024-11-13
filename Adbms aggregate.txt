@@ -1,0 +1,16 @@
+***Display only id, name and city of employee.
+> db.Employee.aggregate([{$project:{Emp_ID:1,Emp_Name:1,Emp_City:1}}]).pretty()
+
+***Display only id, name and city of employee.
+> db.Employee.aggregate([{$project:{_id:0,Emp_ID:1,Emp_Name:1,Emp_City:1}}]).pretty()
+
+***Display only id and salary of employee whose salary is greater than 10000.
+>db.Employee.aggregate([{$project:{Emp_ID:1,Emp_Sal:1}},{$match:{Emp_Sal:{$gt:10000}}}]).pretty()
+
+***Display employee name from Nasik city and sort it by considering their names.
+>db.Employee.aggregate([{$project:{Emp_Name:1,Emp_City:1}},{$match:{Emp_City:'Nashik'}},{$sort:{E
+mp_Name:1}}]).pretty()
+
+***Display top 5 employee’s id and name by considering their salary.
+> db.Employee.aggregate([{$project:{Emp_ID:1,Emp_Name:1,Emp_Sal:1}},{$sort:{Emp_Sal:-
+1}},{$limit:5}]).pretty()

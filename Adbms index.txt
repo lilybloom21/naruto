@@ -1,0 +1,11 @@
+***Create an index on the name field of an employee.
+> db.Employee.ensureIndex({Emp_Name:1})
+
+***Create a compound index on name, city and salary of an employee.
+> db.Employee.ensureIndex({Emp_Name:1,Emp_City:1,Emp_Sal:1})
+
+***Create an unique index on the ID field of an employee.
+> db.Employee.ensureIndex({Emp_ID:1},{unique:true})
+
+***Remove the index created on name field of an employee.
+> db.Employee.dropIndex({Emp_Name:1})
